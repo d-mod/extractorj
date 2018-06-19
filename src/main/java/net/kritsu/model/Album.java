@@ -9,6 +9,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Album implements Iterable<Sprite>{
+    private String path;
+    private int offset;
+    private int length;
     private int version;
     private long indexLength;
     private int count;
@@ -16,6 +19,30 @@ public class Album implements Iterable<Sprite>{
     private int paletteIndex;
     private List<List<byte[]>> palettes;
     private Handler handler;
+    
+    public String getPath() {
+        return path;
+    }
+    
+    public void setPath(String path) {
+        this.path=path;
+    }
+    
+    public int getOffset() {
+        return offset;
+    }
+    
+    public int getLength() {
+        return length;
+    }
+    
+    public void setLength(int length) {
+        this.length=length;
+    }
+    
+    public void setOffset(int offset) {
+        this.offset=offset;
+    }
     
     public int getVersion() {
         return version;
@@ -92,5 +119,20 @@ public class Album implements Iterable<Sprite>{
             return  palettes.get(paletteIndex);
         }
         return new ArrayList<byte[]>();
+    }
+    
+    @Override
+    public String toString() {
+        return "Album{" +
+                "path='" + path + '\'' +
+                ", offset=" + offset +
+                ", length=" + length +
+                ", version=" + version +
+                ", indexLength=" + indexLength +
+                ", count=" + count +
+                ", paletteIndex=" + paletteIndex +
+                ", palettes=" + palettes +
+                ", handler=" + handler +
+                '}';
     }
 }
