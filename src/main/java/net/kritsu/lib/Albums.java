@@ -5,16 +5,14 @@ import net.kritsu.exception.FileInvalidException;
 import net.kritsu.handler.*;
 import net.kritsu.model.Album;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import static net.kritsu.lib.Streams.readInt;
 import static net.kritsu.lib.Streams.readLong;
 
-public class AlbumDecoder {
+public class Albums {
     public static final String NPK_FlAG = "NeoplePack_Bill";
     
     public static final String IMG_FLAG="Neople Img File";
@@ -41,7 +39,25 @@ public class AlbumDecoder {
         }
         return list;
     }
-
+    
+    
+    public static List<Album> readNpk(File file){
+        try (InputStream in=new FileInputStream(file)){
+            return  readNpk(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static List<Album> readNpk(String path){
+        try (InputStream in=new FileInputStream(path)){
+            return  readNpk(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     public static Album read(InputStream in,Album album) throws IOException {
         String flag=readString(in);
@@ -74,6 +90,23 @@ public class AlbumDecoder {
         return read(in, null);
     }
     
+    public static Album  read(File file) {
+        try (InputStream in=new FileInputStream(file)) {
+            return read(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static Album read(String path) {
+        try (InputStream in=new FileInputStream(path)) {
+            return read(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     private static List<Album> readInfo(InputStream in) throws IOException {
         String flag=readString(in);

@@ -121,6 +121,14 @@ public class Album implements Iterable<Sprite>{
         return new ArrayList<byte[]>();
     }
     
+    public String getName() {
+        if (path == null || "".equals(path)) {
+            return null;
+        }
+        int index=path.lastIndexOf("/");
+        return path.substring(index + 1);
+    }
+    
     @Override
     public String toString() {
         return "Album{" +
